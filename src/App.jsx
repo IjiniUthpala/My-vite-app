@@ -1,33 +1,31 @@
 // src/App.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 function App() {
-  const [functionData, setFunctionData] = useState(null);
-  const [name, setName] = useState('User');
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(`/.netlify/functions/customFunction?name=${encodeURIComponent(name)}`);
-      const data = await response.json();
-      setFunctionData(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [name]);
+  const handleButtonClick = () => {
+    if (name.trim() !== '') {
+      setMessage(`Hello ${name}! Welcome to the Vite app.`);
+    } else {
+      setMessage('Please enter your name.');
+    }
+  };
 
   return (
     <div>
       <h1>Your Vite App with Netlify Function</h1>
       <label>
         Enter your name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input type="text" value={name} onChange={handleNameChange} />
       </label>
-      {functionData && <p>{functionData.message}</p>}
-      {!functionData && <p>Loading data...</p>}
+      <button onClick={handleButtonClick}>Enter</button>
+      <p>{message}</p>
     </div>
   );
 }
