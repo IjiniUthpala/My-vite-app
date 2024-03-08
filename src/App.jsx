@@ -15,6 +15,7 @@ function App() {
     <div>
       <h1>Your Vite App with Netlify Function</h1>
       {functionData && <p>{functionData.message}</p>}
+      {!functionData && <p>Loading data...</p>}
     </div>
   );
 }
