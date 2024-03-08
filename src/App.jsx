@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className={`${styles.container} ${isSubmitted ? styles.submitted : ''}`}>
-      <h1>Your Vite App with Netlify Function</h1>
+      <h1>Welcome to my Vite App</h1>
       <label>
         Enter your name:
         <input type="text" value={name} onChange={handleNameChange} className={styles.input} />
